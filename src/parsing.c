@@ -6,7 +6,7 @@
 /*   By: alicigar < alicigar@student.42malaga.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 12:41:53 by alicigar          #+#    #+#             */
-/*   Updated: 2025/09/05 17:36:48 by alicigar         ###   ########.fr       */
+/*   Updated: 2025/09/09 20:12:09 by alicigar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_valid_digit(char *str)
 
 	if (!str || !*str)
 	{
-		ft_printf("Error\nMissing input.");
+		ft_printf("Error\n");
 		return (0);
 	}
 	i = 0;
@@ -36,18 +36,18 @@ int	is_valid_digit(char *str)
 	return (1);
 }
 
-int	check_dupes(int *values, int args_num)
+int	check_dupes(int *numbers, int count)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < args_num)
+	while (i < count)
 	{
 		j = i + 1;
-		while (j < args_num)
+		while (j < count)
 		{
-			if (values[i] == values[j])
+			if (numbers[i] == numbers[j])
 			{
 				ft_printf("Error\nDuplicate values detected.");
 				return (1);
@@ -62,7 +62,7 @@ int	check_dupes(int *values, int args_num)
 int	between_int(const char *nptr)
 {
 	long long	r;
-	int		ng;
+	int			ng;
 
 	r = 0;
 	ng = 1;
@@ -79,7 +79,7 @@ int	between_int(const char *nptr)
 		r = r * 10 + (*nptr - '0');
 		if ((ng == 1 && r > 2147483647) || (ng == -1 && - r < -2147483648))
 		{
-			ft_printf("Error\n/*Number is out of range.*/");
+			ft_printf("Error\n");
 			return (0);
 		}
 		nptr++;
@@ -87,27 +87,22 @@ int	between_int(const char *nptr)
 	return (1);
 }
 
-int	parsing_validation(char	**args, int args_num, int *values)
+int	empty_str(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (i < args_num)
+	if (!str)
 	{
-		if (!is_valid_digit(args[i]))
+		ft_printf("Error\n");
+		return (1);
+	}
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && (str[i] < 9 || str[i] > 13))
 			return (0);
-		if (!between_int(args[i]))
-			return (0);
-		values[i] = ft_atoi(args[i]);
 		i++;
 	}
-	if (!check_dupes(values, args_num))
-		return (0);
+	ft_printf("Error\n");
 	return (1);
 }
-/*
-return(0): el argumento no es valido, return(1): el argumento es valido.
-lo convierte con ft_atoi
-verifica que está entre int min e int max
-evita números duplicados/que se repitan
-*/
