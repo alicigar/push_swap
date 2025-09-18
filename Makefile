@@ -2,8 +2,8 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 INCLUDES = -Iinclude -Ilibft
-SRCS = src/main.c src/parsing.c src/movements.c src/sort.c src/radix.c \
-src/check_and_parse.c src/utils.c src/index.c src/free.c src/parsing_validation.c 
+SRCS = src/check_and_parse.c src/main.c src/movements.c src/parsing.c \
+src/radix.c src/sort.c src/utils.c 
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
 RM = rm -f
