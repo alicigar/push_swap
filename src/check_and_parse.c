@@ -6,7 +6,7 @@
 /*   By: alicigar < alicigar@student.42malaga.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 23:00:37 by alicigar          #+#    #+#             */
-/*   Updated: 2025/09/19 00:25:07 by alicigar         ###   ########.fr       */
+/*   Updated: 2025/09/19 00:34:57 by alicigar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,20 @@ int	index_check(int *indexed, int argc, char **args, int *numbers)
 	return (1);
 }
 
+int	is_sorted(int *array, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count - 1)
+	{
+		if (array[i] > array[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	check_is_sorted(int *indexed, int count, int argc, char **args)
 {
 	if (is_sorted(indexed, count))
@@ -72,16 +86,4 @@ int	check_is_sorted(int *indexed, int count, int argc, char **args)
 		return (0);
 	}
 	return (1);
-}
-
-int	count_argc(int argc, char **args)
-{
-	int	count;
-
-	count = 0;
-	if (argc == 2)
-		count = count_args(args);
-	else
-		count = argc - 1;
-	return (count);
 }

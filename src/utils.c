@@ -6,7 +6,7 @@
 /*   By: alicigar < alicigar@student.42malaga.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 23:17:40 by alicigar          #+#    #+#             */
-/*   Updated: 2025/09/19 00:24:58 by alicigar         ###   ########.fr       */
+/*   Updated: 2025/09/19 00:35:01 by alicigar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,51 @@ int	count_args(char **args)
 	return (count);
 }
 
-int	is_sorted(int *array, int count)
+int	count_argc(int argc, char **args)
+{
+	int	count;
+
+	count = 0;
+	if (argc == 2)
+		count = count_args(args);
+	else
+		count = argc - 1;
+	return (count);
+}
+
+void	index_numbers(int *numbers, int *indexed, int count)
+{
+	int	i;
+	int	j;
+	int	rank;
+
+	i = 0;
+	while (i < count)
+	{
+		rank = 0;
+		j = 0;
+		while (j < count)
+		{
+			if (numbers[i] > numbers[j])
+				rank++;
+			j++;
+		}
+		indexed[i] = rank;
+		i++;
+	}
+}
+
+void	free_ft_split(char **array_of_numbers)
 {
 	int	i;
 
+	if (!array_of_numbers)
+		return ;
 	i = 0;
-	while (i < count - 1)
+	while (array_of_numbers[i])
 	{
-		if (array[i] > array[i + 1])
-			return (0);
+		free(array_of_numbers[i]);
 		i++;
 	}
-	return (1);
+	free(array_of_numbers);
 }
